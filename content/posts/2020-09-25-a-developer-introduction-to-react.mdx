@@ -1,0 +1,464 @@
+---
+date: 2020-09-25
+title: "A Developer's Introduction to React"
+template: post
+thumbnail: '../thumbnails/react.png'
+slug: getting-started-with-react
+categories:
+  - React
+  - Javascript
+tags:
+  - react
+toc:
+  - Prerequisites
+  - What is React?
+  - Setting Up a React Project
+  - Types of Components
+  - Props
+  - State
+  - Making an API call - GET
+  - Building a React App
+  - Conclusion
+nextTitle:
+nextSlug:
+prevTitle:
+prevSlug:
+---
+
+<p class="blog-description">This essential guide will walk you through, on learning about few terms and their uses such as props, state, context, etc and Building an Application from Scratch in React.</p>
+
+<TOC
+  slug="getting-started-with-react"
+  headings={[
+    { id: "prerequisites", title: "Prerequisites" },
+    { id: "what-is-react", title: "What is React?" },
+    { id: "setting-up-react-project", title: "Using React in Standalone Application or in Existing Project" },
+    { id: "types-of-components", title: "Types of Components" },
+    { id: "props", title: "Props" },
+    { id: "state", title: "State" },
+    { id: "making-an-api-call", title: "Making an API call - GET" },
+    { id: "building-react-app", title: "Building and Deploying a React App" },
+    { id: "conclusion", title: "Conclusion" },
+  ]}
+/>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+Learning React requires understanding of some amount of knowledge and understanding of web technologies. I have listed below few things which you should know before starting with React.
+- Basic knowledge of [HTML & CSS](https://www.udemy.com/course/html-and-css-for-beginners-crash-course-learn-fast-easy/)
+- Basic knowledge of [Javascript and Programming](https://javascript.info/)
+- Basic knowledge of [DOM (Document Object Model)](https://www.javascripttutorial.net/javascript-dom/)
+- Familiarity with [ES6](http://es6-features.org/) syntax and features.
+- [Node.js](https://nodejs.dev/learn) and [NPM](https://www.npmjs.com/) installed globally.
+
+<h2 id="what-is-react">What is React?</h2>
+
+- React is JavaScript UI Library.
+- Open-source and Built by Facebook.
+- Used on frontend to build beautiful user interfaces.
+- Fast, scalable, and simple.
+
+Using React, you can build reusable components which works as a custom HTML tag. To simplify Component is a collection of core HTML tags and other custom components. React uses JSX syntax format to build components.
+
+<h2 id="setting-up-react-project">Using React in Standalone Application or in Existing Project</h2>
+
+We will see one by one on how to use setup react project.
+
+<h3 class="mt-0">1. Using React in Standalone Application (Create React App)</h3>
+
+Creating a React App requires lots of javascript configuration and mainting them. [Create-React-App](https://create-react-app.dev/) is a CLI tool which lets us generate all the things needed to run a project.
+Here are the very few simple steps to generate a react app using create-react-app
+
+```bash
+$ npx create-react-app my-first-react-app
+```
+or
+```bash
+$ npm install -g create-react-app
+$ create-react-app my-first-react-app
+```
+then
+```bash
+$ cd my-first-react-app && npm start
+```
+You can then open the `my-first-react-app` folder inside a code editor and get started with code and start making changes throug in `src/App.js` file.
+
+<h3 class="mt-0">2. Using React in Existing Application (Through CDN)</h3>
+Using React through CDN is the easiest way to get started. Here are the simple steps below to run the React in your existing application.
+
+Create a `index.html` file and add the below `script` tags in `head` tag.
+
+```javascript
+// Adding these 2 scripts will allow you to use all the features of React
+<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+
+// Adding the babel script inside project allows you to write html code in JSX syntax.
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+```
+
+Adding Babel script allow you to write html code in JSX syntax. To use the babel script you have to add the React code inside following tags.
+
+```javascript
+<script type="text/babel">
+  // React code here
+</script>
+```
+
+Without adding Babel script, you can write html code like below.
+
+```javascript
+// 
+const e = React.createElement;
+
+// Display a "Like" <button>
+return e(
+  'span',
+  { id: "span1" },
+  'Some Text Here'
+);
+```
+
+You can add nested html elements like below.
+
+```javascript
+// 
+const e = React.createElement;
+
+// Display a "Like" <button>
+return e(
+  'div',
+  { id: "parent-div" },
+  [
+    e(
+      'div',
+      { id: "child-div-1" },
+      'Div 1'
+    ),
+    e(
+      'div',
+      { id: "child-div-2" },
+      'Div 2'
+    )
+  ]
+);
+```
+
+Combining above all snippets in one, You can add use React like below.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Hello React!</title>
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+  </head>
+
+  <body>
+    <div id="root-elem"></div>
+    <script type="text/babel">
+      class IndexFile extends React.Component {
+        render() {
+          return <h1>Hello world!</h1>
+        }
+      }
+
+      ReactDOM.render(<IndexFile />, document.getElementById('root-elem'))
+    </script>
+  </body>
+</html>
+```
+
+<h2 id="types-of-components">Types of Components</h2>
+
+A Component is one of the core feature of React. Every React application is made of lots of components. Each component can have multiple components. These components are reusable for any where within application.
+A Component can be logical or just a representational, It depends on what a level a component is used.
+
+There are 2 types of components in React ecosystem. A Functional and Class Component. Before React 16.8, These types had different meaning. A Functional Component was also called dumb component. And a Class Component was also called Logical component.
+Reason it was like that because, State was not accessible within functional components but it was there in class components.
+
+Later in React 16.8, Hooks feature was introduced in update, which allows functional components to have all lifecycle and state alternatives from class component. Let's see example of both of them below. Both below components does the same thing regardless of their types.
+
+<h3 class="mt-0">1. Class Component</h3>
+
+```jsx
+import React from 'react';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '',
+    };
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+render() {
+    return (
+      <div>
+        <h1>Hello React ES6 Class Component!</h1>
+        <input
+          value={this.state.value}
+          type="text"
+          onChange={this.onChange}
+        />
+        <p>{this.state.value}</p>
+      </div>
+    );
+  }
+}
+```
+
+<h3 class="mt-0">2. Functional Component</h3>
+
+```jsx
+import React, { useState } from 'react';
+
+const App = (props) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChange = event => {
+    setInputValue(event.target.value);
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello React Functional Component!</h1>
+        <input
+          value={inputValue}
+          type="text"
+          onChange={handleChange}
+        />
+        <p>{inputValue}</p>
+      </div>
+    );
+  }
+}
+```
+
+<h2 id="props">Props</h2>
+
+Props are just normal properties passed down to child components. It can be `string, number, array, object, a function or another component`.
+Let's see in an example, how we can pass props to child components
+
+```jsx
+
+const ChildComponent = (props) => {
+  // Extracting properties passed from ParentComponent into Child in function argument.
+  const { heading, metadata, data, handleClick } = props;
+
+  return (
+    <div>
+      <h1>{heading}</h1>
+      <p>{metadata.date}</p>
+      <p>{metadata.description}</p>
+
+      <ul>
+        {data.map((child, index) => <li key={index}>{child}</li>)}
+      </ul>
+
+      <button onClick={handleClick}>Click here...</button>
+    </div>
+  )
+}
+
+const ParentComponent = () => {
+  const clickHandler = (event) => {
+    console.log('Clicked');
+  }
+
+  return (
+    <div>
+      <h1>Child Component will be rendered below.</h1>
+      <ChildComponent
+        heading="Child Component Heading" // String Property
+        metadata={{ // Object Property
+          date: '25/09/2020',
+          description: 'Something Something'
+        }}
+        data={[ '1', '2', '3', '4', '5' ]} // Array Property
+        handleClick={clickHandler} // Function reference Property
+      />
+    </div>
+  );
+}
+```
+
+As you can see, I have used Child Component inside Parent Component and passed down some data in form of Properties. Various type of data is passed down to Child Component.
+
+In React, Props are just `read-only`, means it value can not be changed directly. However, We can pass function reference from Parent to Child, and we can listen to an event, based on event we can change the data from Parent and it will reflect in child component. We will see example of that in next section.
+
+<h2 id="state">State</h2>
+
+State is a object that stores the data of component while component is visible in the DOM tree. It makes component dynamic and interactive.
+Change in a state triggers calling of lifecycle methods of React component in class component and at end it re-renders the component.
+
+For class component, `this.state` is used to access state. For function component, `useState` hook is used to create a state variable.
+Let's check in an example of counter in both class and function component, how it works.
+
+<h3 class="mt-0">1. Class Component</h3>
+
+```jsx
+import React from 'react';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    }
+  }
+
+  handleAddCount = () => {
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  handleRemoveCount = () => {
+    this.setState({ count: this.state.count - 1 });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Count: {this.state.count}</h1>
+        <button onClick={this.handleAddCount}>+</button>
+        <button onClick={this.handleRemoveCount}>-</button>
+      </div>
+    );
+  }
+}
+```
+
+> In class component, `this.setState` is used to set the state of variable.
+
+<h3 class="mt-0">2. Functional Component</h3>
+
+```jsx
+import React, { useState } from 'react';
+
+const App = (props) => {
+  const [count, setCount] = useState(0);
+
+  const handleAddCount = () => {
+    setCount(count + 1);
+  }
+
+  const handleRemoveCount = () => {
+    setCount(count + 1);
+  }
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={handleAddCount}>+</button>
+      <button onClick={handleRemoveCount}>-</button>
+    </div>
+  );
+}
+```
+
+> In functional component, `useState` hook is used to enable state.
+
+<h2 id="making-an-api-call">Making an API call - GET</h2>
+
+Making an API call is very easy in React. We will use core JavaScript API to make an API call to get a list of todos. I will show you in an example on how to call a GET API in class and functional component.
+First, all the fetched data will be stored in a state, and then we show it in a list. We have to make sure that API is only called once when component is mounted on DOM.
+Let's check the example.
+
+<h3 class="mt-0">1. Class Component</h3>
+
+```jsx
+import React from 'react';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: []
+    }
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => response.json())
+      .then(todos => this.setState({ todos: todos }))
+  }
+
+  render() {
+    return (
+      <ul>
+        {todos.map(todo => <li key={todo.id}>{todo.title} - {todo.completed ? 'Completed' : 'Pending'}</li>)}
+      </ul>
+    );
+  }
+}
+```
+
+> Here we have used **`fetch`** api of JavaScript to fetch the todos from API server. The reason to call API in **`componentDidMount`** function is because it is a lifecycle method of React and only called once when the component is mounted on DOM.
+
+<h3 class="mt-0">2. Functional Component</h3>
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+const App = (props) => {
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => response.json())
+      .then(todos => setTodos(todos))
+  }, [])
+
+  return (
+    <ul>
+      {todos.map(todo => <li key={todo.id}>{todo.title} - {todo.completed ? 'Completed' : 'Pending'}</li>)}
+    </ul>
+  );
+}
+```
+
+> **`useEffect`** is a hook provided by React. componentDidMount, componentDidUpdate, and componentWillUnMount can all be used in useEffect hook. Check the below code snippet for that.
+
+```javascript
+useEffect(() => {
+  // code here for componentDidMount and componentDidUpdate
+  return () => {
+    // code here for componentWillUnMount
+  }
+}, []) // [] -> // Contains Effecting Variable for change in state and re-render
+```
+
+<h2 id="building-react-app">Building a React App</h2>
+
+If a React application is setup using create-react-app, you need to run a command to generate a build.
+
+```bash
+$ npm run build
+```
+
+After running the build command, you will find build under **`/build`** folder. If you want to test the build locally, just install npm package.
+
+```bash
+$ npm install -g serve
+```
+
+and run
+
+```bash
+$ serve build
+// where build is folder name
+```
+
+<h2 id="conclusion">Conclusion</h2>
+
+This is some very basic information about React to get started with it. It should give you enough information on Class and Functional Components, State, Props calling an API.
+If you have any questions, please let me know below in the comments.
