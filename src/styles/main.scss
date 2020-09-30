@@ -22,3 +22,11 @@
 
 @import 'themes/dark';
 @import 'themes/404';
+
+.comments .utterances {
+  max-width: unset;
+}
+
+.language-text {
+  word-wrap: break-word;
+}

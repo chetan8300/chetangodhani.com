@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import coffee from '../images/coffee.svg'
-import me from '../../content/images/me.jpeg'
 
 export default class UserInfo extends Component {
   render() {

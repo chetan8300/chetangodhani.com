@@ -10,14 +10,14 @@ const config = {
   dateFormat: 'MMMM Do, YYYY',
   siteDescription: 'Hi I\'m Chetan, a Web Developer from Ahmedabad, India. Working on technologies like PHP, Laravel, Node.JS, React.JS, etc.',
   siteRss: '/rss.xml',
-  googleAnalyticsID: 'UA-125079658-2',
+  googleAnalyticsID: 'UA-179307873-1',
   disqusShortname: 'chetangodhani',
   postDefaultCategoryID: 'Tech',
   userName: 'chetangodhani',
   userEmail: 'chetangodhani9@gmail.com',
   userTwitter: 'cdgodhani',
   userLocation: 'Ahmedabad, IN',
-  userAvatar: 'https://pbs.twimg.com/profile_images/1061334093923704832/EFFrYsTE_400x400.jpg',
+  userAvatar: 'https://www.gravatar.com/avatar/72d1a6cdbdfbe17b98b6510e908683c9?s=500',
   userDescription: 'Hi I\'m Chetan, a Web Developer from Ahmedabad, India. Working on technologies like PHP, Laravel, Node.JS, React.JS, etc.',
   menuLinks: [
     {
