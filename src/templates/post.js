@@ -123,7 +123,6 @@ export const pageQuery = graphql`
         template
         slug
         date
-        toc
       }
     }
   }
