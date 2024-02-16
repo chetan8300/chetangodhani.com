@@ -60,3 +60,6 @@ public/
 
 # Bundle stats
 bundle-stats.json
+
+tasks.text
+pending-blogs

@@ -8,8 +8,7 @@ export default class UserInfo extends Component {
         <div className="container note-container">
           <div className="flex-author">
             <p>
-             Hi I'm Chetan, a Web Developer from Ahmedabad, India.
-             Working on technologies like PHP, Laravel, Node.JS, React.JS, etc.
+              Hey there, I'm Chetan, a Software Engineer based in London, Ontario. I'm all about using the latest and greatest tech to build amazing things. From crafting interactive interfaces with React.js to powering up back-end systems with Node.js, PHP, and Laravel, I thrive on turning ideas into reality. Whether it's solving complex problems or diving into new technologies like Go, I'm always up for the challenge and eager to push the boundaries of what's possible in the world of software engineering.
             </p>
             <a href="https://ko-fi.com/chetangodhani" className="donate-button" target="_blank">
               Buy me a coffee <img src={coffee} className="coffee-icon" />

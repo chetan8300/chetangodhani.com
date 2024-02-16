@@ -22,7 +22,7 @@ export default class Index extends Component {
             <div>
               <h1>Hey! I'm Chetan Godhani.</h1>
               <p>
-                I am a full-stack freelance developer. I am working in web technologies such as React.JS, Node.JS, and Laravel. I have been working in web developing from 2017. Through this website I share the knowledge gained in this years.
+                I'm a Software Engineer, specializing in web technologies like React.js, Node.js, Laravel, and Go. I enjoy crafting sleek interfaces and building powerful systems. Currently exploring Go, React Native and DevOps concepts alongside my day job.
               </p>
               <div className="social-buttons">
                 <div>
@@ -92,9 +92,7 @@ export const pageQuery = graphql`
             categories
             thumbnail {
               childImageSharp {
-                fixed(width: 150, height: 150) {
-                  ...GatsbyImageSharpFixed
-                }
+                gatsbyImageData(width: 150, height: 150)
               }
             }
             date
@@ -120,9 +118,7 @@ export const pageQuery = graphql`
             categories
             thumbnail {
               childImageSharp {
-                fixed(width: 150, height: 150) {
-                  ...GatsbyImageSharpFixed
-                }
+                gatsbyImageData(width: 150, height: 150)
               }
             }
             date

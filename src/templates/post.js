@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
-import Img from 'gatsby-image'
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 import Layout from '../layout'
 import UserInfo from '../components/UserInfo'
@@ -39,7 +39,7 @@ const PostTemplate = (props) => {
     }
   }, []) // eslint-disable-line
 
-  let thumbnail
+  let thumbnail;
 
   if (!post.id) {
     post.id = slug
@@ -50,7 +50,7 @@ const PostTemplate = (props) => {
   }
 
   if (post.thumbnail) {
-    thumbnail = post.thumbnail.childImageSharp.fixed
+    thumbnail = getImage(post.thumbnail)
   }
 
   const date = formatDate(post.date)
@@ -65,7 +65,7 @@ const PostTemplate = (props) => {
       <SEO postPath={slug} postNode={postNode} postSEO />
       <article className="single container">
         <header className={`single-header ${!thumbnail ? 'no-thumbnail' : ''}`}>
-          {thumbnail ? <Img fixed={post.thumbnail.childImageSharp.fixed} /> : null}
+          {thumbnail ? <GatsbyImage image={thumbnail} alt={post.title} /> : <div />}
           <div className="flex">
             <h1>{post.title}</h1>
             <div className="post-meta">
@@ -113,9 +113,7 @@ export const pageQuery = graphql`
         title
         thumbnail {
           childImageSharp {
-            fixed(width: 150, height: 150) {
-              ...GatsbyImageSharpFixed
-            }
+            gatsbyImageData(width: 150, height: 150)
           }
         }
         categories

@@ -1,4 +1,4 @@
-const urljoin = require('url-join')
+const urljoin = require('url-join');
 const config = require('./data/SiteConfig')
 
 module.exports = {
@@ -21,8 +21,9 @@ module.exports = {
     'gatsby-plugin-sass',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-twitter',
-    `gatsby-transformer-sharp`,
+    `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-sitemap`,
     {
@@ -182,6 +183,7 @@ module.exports = {
       `,
         feeds: [
           {
+            title: "Chetan Godhani's RSS Feed",
             serialize(ctx) {
               const { rssMetadata } = ctx.query.site.siteMetadata
               return ctx.query.allMdx.edges.map(edge => ({

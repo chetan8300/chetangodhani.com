@@ -5,49 +5,49 @@ const siteConfig = require('./data/SiteConfig')
 
 const postNodes = []
 
-// function addSiblingNodes(createNodeField) {
-//   postNodes.sort(({ frontmatter: { date: date1 } }, { frontmatter: { date: date2 } }) => {
-//     const dateA = moment(date1, siteConfig.dateFromFormat)
-//     const dateB = moment(date2, siteConfig.dateFromFormat)
+function addSiblingNodes(createNodeField) {
+  postNodes.sort(({ frontmatter: { date: date1 } }, { frontmatter: { date: date2 } }) => {
+    const dateA = moment(date1, siteConfig.dateFromFormat)
+    const dateB = moment(date2, siteConfig.dateFromFormat)
 
-//     if (dateA.isBefore(dateB)) return 1
-//     if (dateB.isBefore(dateA)) return -1
+    if (dateA.isBefore(dateB)) return 1
+    if (dateB.isBefore(dateA)) return -1
 
-//     return 0
-//   })
+    return 0
+  })
 
-//   for (let i = 0; i < postNodes.length; i += 1) {
-//     const nextID = i + 1 < postNodes.length ? i + 1 : 0
-//     const prevID = i - 1 >= 0 ? i - 1 : postNodes.length - 1
-//     const currNode = postNodes[i]
-//     const nextNode = postNodes[nextID]
-//     const prevNode = postNodes[prevID]
+  for (let i = 0; i < postNodes.length; i += 1) {
+    const nextID = i + 1 < postNodes.length ? i + 1 : 0
+    const prevID = i - 1 >= 0 ? i - 1 : postNodes.length - 1
+    const currNode = postNodes[i]
+    const nextNode = postNodes[nextID]
+    const prevNode = postNodes[prevID]
 
-//     createNodeField({
-//       node: currNode,
-//       name: 'nextTitle',
-//       value: nextNode.frontmatter.title,
-//     })
+    createNodeField({
+      node: currNode,
+      name: 'nextTitle',
+      value: nextNode.frontmatter.title,
+    })
 
-//     createNodeField({
-//       node: currNode,
-//       name: 'nextSlug',
-//       value: nextNode.frontmatter.slug,
-//     })
+    createNodeField({
+      node: currNode,
+      name: 'nextSlug',
+      value: nextNode.frontmatter.slug,
+    })
 
-//     createNodeField({
-//       node: currNode,
-//       name: 'prevTitle',
-//       value: prevNode.frontmatter.title,
-//     })
+    createNodeField({
+      node: currNode,
+      name: 'prevTitle',
+      value: prevNode.frontmatter.title,
+    })
 
-//     createNodeField({
-//       node: currNode,
-//       name: 'prevSlug',
-//       value: prevNode.frontmatter.slug,
-//     })
-//   }
-// }
+    createNodeField({
+      node: currNode,
+      name: 'prevSlug',
+      value: prevNode.frontmatter.slug,
+    })
+  }
+}
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
@@ -88,15 +88,15 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 }
 
-// exports.setFieldsOnGraphQLNodeType = ({ type, actions }) => {
-//   const { name } = type
+exports.setFieldsOnGraphQLNodeType = ({ type, actions }) => {
+  const { name } = type
 
-//   const { createNodeField } = actions
-  
-//   if (name === 'MarkdownRemark' || name === 'Mdx') {
-//     addSiblingNodes(createNodeField)
-//   }
-// }
+  const { createNodeField } = actions
+
+  if (name === 'MarkdownRemark' || name === 'Mdx') {
+    addSiblingNodes(createNodeField)
+  }
+}
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
